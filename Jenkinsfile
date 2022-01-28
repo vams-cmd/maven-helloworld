@@ -29,13 +29,13 @@ pipeline {
         }
         steps {
             sh '''
-            cp my-app-1.0-SNAPSHOT.jar /home/ubuntu/jenkins/workspace/1st_Assignment_stage
+            cp /home/ubuntu/jenkins/workspace/1st_Assignment_stage/target/my-app-1.0-SNAPSHOT.jar /home/ubuntu/jenkins/workspace/1st_Assignment_stage
             cd /home/ubuntu/jenkins/workspace/1st_Assignment_stage
-						docker rm bvk10r/ct-assignments:1
-			      docker rm assignment1:1
+	    docker rm bvk10r/ct-assignments:1
+	    docker rm assignment1:1
             docker build -t assignment1 .
             docker tag assignment1:latest bvk10r/ct-assignments:1 
-			      docker run -d --name ass_cont bvk10r/ct-assignments:1
+	    docker run -d --name ass_cont bvk10r/ct-assignments:1
             docker push bvk10r/ct-assignments:1
             '''
         }
