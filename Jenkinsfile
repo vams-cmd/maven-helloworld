@@ -31,10 +31,11 @@ pipeline {
             sh '''
             cp /home/ubuntu/jenkins/workspace/1st_Assignment_stage/target/my-app-1.0-SNAPSHOT.jar /home/ubuntu/jenkins/workspace/1st_Assignment_stage
             cd /home/ubuntu/jenkins/workspace/1st_Assignment_stage
-	    docker rmi bvk10r/ct-assignments:1
-	    docker rm assignment1:1
-            docker build -t assignment1 .
-            docker tag assignment1:latest bvk10r/ct-assignments:1 
+	    docker rm -f ass_cont 2> /dev/null || true
+	    docker rmi -f bvk10r/ct-assignments:1 2> /dev/null || true
+	    docker rmi -f assignment1:1 2> /dev/null || true
+            docker build -t assignment1:1 .
+            docker tag assignment1:1 bvk10r/ct-assignments:1 
 	    docker run -d --name ass_cont bvk10r/ct-assignments:1
             docker push bvk10r/ct-assignments:1
             '''
