@@ -7,7 +7,7 @@ pipeline {
   stages {
     stage ('Checkout') {
       steps {
-      git branch: 'Dev', credentialsId: 'Github_username', url: 'https://github.com/vams-cmd/maven-helloworld.git'
+      git branch: 'stage', credentialsId: 'Github_username', url: 'https://github.com/vams-cmd/maven-helloworld.git'
       }
     }  
     stage ('Build') {
