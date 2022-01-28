@@ -36,7 +36,7 @@ pipeline {
 	    docker rmi -f assignment1:1 2> /dev/null || true
             docker build -t assignment1:1 .
             docker tag assignment1:1 bvk10r/ct-assignments:1 
-	    docker run -d --name ass_cont bvk10r/ct-assignments:1
+	    docker run --name ass_cont bvk10r/ct-assignments:1
             docker push bvk10r/ct-assignments:1
             '''
         }
