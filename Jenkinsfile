@@ -7,7 +7,7 @@ pipeline {
   stages {
     stage ('Checkout') {
       steps {
-      git branch: 'dev', credentialsId: 'Github_username', url: 'https://github.com/vams-cmd/maven-helloworld.git'
+      git branch: 'stage', credentialsId: 'Github_username', url: 'https://github.com/vams-cmd/maven-helloworld.git'
       }
     }  
     stage ('Build') {
@@ -15,7 +15,6 @@ pipeline {
       sh 'mvn clean install -f pom.xml'
       }
     }
-
     stage ('save artifacts') {
         agent {
         label 'jenkins-slave1'
@@ -25,6 +24,7 @@ pipeline {
             cp /home/ubuntu/jenkins/workspace/1st_Assignment_dev/target/my-app-1.0-SNAPSHOT.jar /home/ubuntu/jenkins/workspace/1st_Assignment_dev
             '''
         }
+    }
     stage ('save artifacts') {
         agent {
         label 'jenkins-slave1'
@@ -37,7 +37,7 @@ pipeline {
 			docker pull bvk10r/ct-assignments:1
 			docker run --name ass_cont bvk10r/ct-assignments:1
             '''
-        }		
+        }
     }  
   }
 }
