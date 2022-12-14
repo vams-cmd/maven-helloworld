@@ -1,22 +1,48 @@
-@Override
-public boolean equals(Object o) 
+package com.mycompany.app;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.After;
+import static org.junit.Assert.*;
+
+/**
+ * Unit test for simple App.
+ */
+public class AppTest
 {
-  ....
-  CheckpointStatistics that = (CheckpointStatistics) o;
-  return id == that.id &&
-    savepoint == that.savepoint &&
-    triggerTimestamp == that.triggerTimestamp &&
-    latestAckTimestamp == that.latestAckTimestamp &&
-    stateSize == that.stateSize &&
-    duration == that.duration &&
-    alignmentBuffered == that.alignmentBuffered &&
-    processedData == processedData &&                // <=
-    persistedData == that.persistedData &&
-    numSubtasks == that.numSubtasks &&
-    numAckSubtasks == that.numAckSubtasks &&
-    status == that.status &&
-    Objects.equals(checkpointType, that.checkpointType) &&
-    Objects.equals(
-      checkpointStatisticsPerTask, 
-      that.checkpointStatisticsPerTask);
+
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+
+    @Before
+    public void setUpStreams() {
+        System.setOut(new PrintStream(outContent));
+    }
+
+    @Test
+    public void testAppConstructor() {
+        try {
+            new App();
+        } catch (Exception e) {
+            fail("Construction failed.");
+        }
+    }
+
+    @Test
+    public void testAppMain()
+    {
+        App.main(null);
+        try {
+            assertEquals("Hello World!" + System.getProperty("line.separator"), outContent.toString());
+        } catch (AssertionError e) {
+            fail("\"message\" is not \"Hello World!\"");
+        }
+    }
+
+    @After
+    public void cleanUpStreams() {
+        System.setOut(null);
+    }
+
 }
